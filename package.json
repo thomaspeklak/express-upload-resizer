@@ -1,0 +1,26 @@
+{
+    "name": "express-upload-resizer",
+    "version": "0.0.0",
+    "description": "Resizes files uploads and stores them in a given directory",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/thomaspeklak/express-upload-resizer.git"
+    },
+    "keywords": [
+        "express",
+        "middleware"
+    ],
+    "author": "Thomas Peklak",
+    "license": "BSD",
+    "dependencies": {
+        "mkdirp" : "0.3.x",
+        "gm" : "1.8.x"
+    },
+    "devDependencies" : {
+        "mocha" : "*"
+    }
+}
