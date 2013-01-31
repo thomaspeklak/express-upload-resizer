@@ -18,7 +18,8 @@
     "license": "BSD",
     "dependencies": {
         "mkdirp" : "0.3.x",
-        "gm" : "1.8.x"
+        "gm" : "1.8.x",
+        "node-uuid" : "1.4.x"
     },
     "devDependencies" : {
         "mocha" : "*"
