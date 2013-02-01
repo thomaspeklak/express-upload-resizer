@@ -32,7 +32,7 @@ var validContentTypes = [
 ];
 
 var validContentType = function (file) {
-    return validContentTypes.indexOf(file.contentType) != -1;
+    return validContentTypes.indexOf(file.type) != -1;
 };
 
 var methods = {
