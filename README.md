@@ -13,7 +13,7 @@ it will be published to npm as soon as it has a decent state.
 
 You can use this middleware globally in your app your locally in your routes like this:
 
-´´´javascript
+```javascript
 app.use(require("express-upload-resizer")({
     picture : {
         width: 100,
@@ -37,7 +37,7 @@ app.post("/thumbs", require("express-upload-resizer")({
         method: "thumb"
     }
 }));
-´´´
+```
 
 ##Options
 
