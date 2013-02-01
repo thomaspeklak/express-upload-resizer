@@ -3,6 +3,7 @@
 var path = require("path");
 var fs = require("fs");
 var util = require("util");
+var gm = require("gm");
 var validate = require("./lib/validate");
 var createTargetDirectories = require("./lib/create-target-directories");
 var getUniqueFilePath = require("./lib/get-unused-file-path");
@@ -24,7 +25,48 @@ var getFilesCount = function (files) {
 
 };
 
-var moveFile = function (oldPath, newPath, cb) {
+var validContentTypes = [
+    "image/png",
+    "image/jpeg",
+    "image/gif"
+];
+
+var validContentType = function (file) {
+    return validContentTypes.indexOf(file.contentType) != -1;
+};
+
+var methods = {
+    resize: function (img, out, options, cb) {
+        img.geometry(options.width, options.height, options.arguments)
+            .write(out, cb);
+    },
+    resizeAndCrop: function(img, out, options, cb) {
+        img.geometry(options.width, options.height, "^")
+            .gravity(options.gravity || "center")
+            .crop(options.width, options.height)
+            .write(out, cb);
+    },
+    thumb: function(img, out, options, cb) {
+        img.thumb(options.width,
+                  options.heihgt,
+                  out,
+                  options.quality || 60, cb);
+    }
+};
+
+var moveFile = function (file, newPath, options, cb) {
+    var oldPath = file.path;
+
+    if (options.method && methods[options.method] && validContentType(file)) {
+        var image = gm(oldPath);
+        return methods[options.method](
+            image,
+            newPath,
+            options,
+            cb
+        );
+    }
+
     fs.rename(oldPath, newPath, cb);
 };
 
@@ -33,7 +75,7 @@ var processFile = function (file, type, cb) {
 
     var suggestedFilePath = path.join(this[type].target, file.name);
     getUniqueFilePath(suggestedFilePath, function (newPath) {
-        moveFile(file.path, newPath, cb);
+        moveFile(file, newPath, this[type], cb);
         file.path = newPath;
     });
 };
