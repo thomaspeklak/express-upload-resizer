@@ -71,11 +71,12 @@ var moveFile = function (file, newPath, options, cb) {
 };
 
 var processFile = function (file, type, cb) {
-    if (!this[type]) return cb();
+    var options = this;
+    if (!options[type]) return cb();
 
-    var suggestedFilePath = path.join(this[type].target, file.name);
+    var suggestedFilePath = path.join(options[type].target, file.name);
     getUniqueFilePath(suggestedFilePath, function (newPath) {
-        moveFile(file, newPath, this[type], cb);
+        moveFile(file, newPath, options[type], cb);
         file.path = newPath;
     });
 };
