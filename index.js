@@ -6,6 +6,7 @@ var util = require("util");
 var gm = require("gm");
 var validate = require("./lib/validate");
 var createTargetDirectories = require("./lib/create-target-directories");
+var getSafeFileName = require("./lib/get-safe-file-name");
 var getUniqueFilePath = require("./lib/get-unused-file-path");
 
 var sum = function (a, b) { return a + b; };
@@ -74,7 +75,9 @@ var processFile = function (file, type, cb) {
     var options = this;
     if (!options[type]) return cb();
 
-    var suggestedFilePath = path.join(options[type].target, file.name);
+    var suggestedFilePath = path.join(options[type].target,
+                                      getSafeFileName(file.name, file.type)
+                                     );
     getUniqueFilePath(suggestedFilePath, function (newPath) {
         moveFile(file, newPath, options[type], cb);
         file.path = newPath;
