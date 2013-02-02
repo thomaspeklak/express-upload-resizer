@@ -48,7 +48,7 @@ var methods = {
     },
     thumb: function(img, out, options, cb) {
         img.thumb(options.width,
-                  options.heihgt,
+                  options.height,
                   out,
                   options.quality || 60, cb);
     }
