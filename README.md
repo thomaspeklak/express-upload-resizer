@@ -67,5 +67,5 @@ The path of the resized and moved file can be option with the `file.path` proper
 
 ##Missing features:
 
-- define an array of methods for each type to batch resize files
+- <del>define an array of methods for each type to batch resize files</del>
 - supply additional arguments to graphics magic
