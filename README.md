@@ -35,6 +35,24 @@ app.post("/thumbs", require("express-upload-resizer")({
 }));
 ```
 
+You can specify more than one resize method per tyoe by using an array of options like this:
+
+```javascript
+app.use(require("express-upload-resizer")({
+    picture : [{
+        width: 600,
+        height: 400,
+        target: __dirname + "/public/images/pictures",
+        method: "resize"
+    }, {
+        width: 100,
+        height: 100,
+        target: __dirname + "/public/images/thumbs",
+        method: "thumb"
+    }]
+});
+```
+
 ##Options
 
 - __width__ and __height__: desired dimensions
