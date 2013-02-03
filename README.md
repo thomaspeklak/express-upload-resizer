@@ -41,6 +41,12 @@ app.post("/thumbs", require("express-upload-resizer")({
 - __target__: target directory
 - __method__: can be resize (resize no cropping), resizeAndCrop (resize with cropping), thumb (more or less the same as resize and crop but faster)
 
+##Nameing of files
+
+The middleware tries to keep the original filename if it is unique to the location. Otherwise it will generate a unique name by appending a counter to the name. E.g. _logo.png_ will become _logo__\_\_1__.png_ if another _logo.png_ already exists.
+
+The path of the resized and moved file can be option with the `file.path` property, the name with `file.name`.
+
 ##Missing features:
 
 - define an array of methods for each type to batch resize files

@@ -81,6 +81,7 @@ var processFile = function (file, type, cb) {
     getUniqueFilePath(suggestedFilePath, function (newPath) {
         moveFile(file, newPath, options[type], cb);
         file.path = newPath;
+        file.name = newPath.replace(/.*\//, "");
     });
 };
 
