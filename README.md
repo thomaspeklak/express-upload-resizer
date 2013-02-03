@@ -3,6 +3,8 @@
 is an Express middleware that aims to make resizing and moving of image file uploads
 easier.
 
+If you are looking for a general purpose upload solution try [express-upload](https://github.com/saintedlama/express-upload).
+
 ##Usage
 
 You can use this middleware globally in your app your locally in your routes like this:
