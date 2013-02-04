@@ -1,17 +1,18 @@
 "use strict";
 
+var fs   = require("fs");
+var gm   = require("gm");
 var path = require("path");
-var fs = require("fs");
 var util = require("util");
-var gm = require("gm");
-var validate = require("./lib/validate");
+
 var createTargetDirectories = require("./lib/create-target-directories");
-var getSafeFileName = require("./lib/get-safe-file-name");
-var getUniqueFilePath = require("./lib/get-unused-file-path");
-var normalizeFiles = require("./lib/normalize-files");
-var getFilesCount = require("./lib/get-files-count");
-var resizeMehtods = require("./lib/resize-methods");
-var validateContentType = require("./lib/validate-content-type");
+var getFilesCount           = require("./lib/get-files-count");
+var getSafeFileName         = require("./lib/get-safe-file-name");
+var getUniqueFilePath       = require("./lib/get-unused-file-path");
+var normalizeFiles          = require("./lib/normalize-files");
+var resizeMehtods           = require("./lib/resize-methods");
+var validate                = require("./lib/validate");
+var validateContentType     = require("./lib/validate-content-type");
 
 var moveFile = function (file, newPath, options, cb) {
     var oldPath = file.path;
@@ -47,23 +48,28 @@ var processFile = function (file, type, cb) {
     });
 };
 
+var done = function (files, options, next) {
+    var processed = 0;
+    var filesCount = getFilesCount(files, options);
+    return function () {
+        processed += 1;
+
+        if (processed == filesCount) {
+            normalizeFiles(files);
+            next();
+        }
+    };
+};
+
 var resizeFiles = function (req, res, next) {
     if (!req.files || !Object.keys(req.files).length) return next();
 
     var options = this;
     var files = req.files;
     var types = Object.keys(req.files);
-    var filesCount = getFilesCount(req.files, options);
     var processFileLocal = processFile.bind(options);
-    var processed = 0;
-    var done = function () {
-        processed += 1;
 
-        if (processed == filesCount) {
-            normalizeFiles(req.files);
-            next();
-        }
-    };
+    var cb = complete(req.files, options, next);
 
     types.map(function (type) {
         if (util.isArray(files[type])) {
@@ -72,10 +78,10 @@ var resizeFiles = function (req, res, next) {
                 filesOfType = filesOfType[0];
             }
             filesOfType.forEach(function (file) {
-                processFileLocal(file, type, done);
+                processFileLocal(file, type, cb);
             });
         } else {
-            processFileLocal(files[type], type, done);
+            processFileLocal(files[type], type, cb);
         }
     });
 };
