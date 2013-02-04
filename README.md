@@ -1,5 +1,5 @@
 #UploadResizer
-[![Build Status](https://travis-ci.org/[thomaspeklak]/[express-upload-resizer].png)](https://travis-ci.org/[thomaspeklak]/[express-upload-resizer])
+[![Build Status](https://travis-ci.org/thomaspeklak/express-upload-resizer.png)](https://travis-ci.org/thomaspeklak/express-upload-resizer)
 
 is an Express middleware that aims to make resizing and moving of image file uploads
 easier.
