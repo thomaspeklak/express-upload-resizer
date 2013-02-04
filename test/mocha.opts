@@ -1,6 +1,5 @@
 --require should
 --reporter list
 --ui bdd
---watch
 --growl
 --recursive
