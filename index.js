@@ -69,7 +69,7 @@ var resizeFiles = function (req, res, next) {
     var types = Object.keys(req.files);
     var processFileLocal = processFile.bind(options);
 
-    var cb = complete(req.files, options, next);
+    var cb = done(req.files, options, next);
 
     types.map(function (type) {
         if (util.isArray(files[type])) {
