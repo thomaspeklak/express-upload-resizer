@@ -1,6 +1,6 @@
 {
     "name": "express-upload-resizer",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Resizes files uploads and stores them in a given directory",
     "main": "index.js",
     "scripts": {
