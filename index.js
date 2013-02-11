@@ -33,6 +33,7 @@ var moveFile = function (file, newPath, options, cb) {
 var processFile = function (file, type, cb) {
     var options = this;
     if (!options[type]) return cb();
+    if (file.size === 0) return cb();
 
     file.processedPath = [];
     file.processedName = [];
