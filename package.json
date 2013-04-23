@@ -1,6 +1,6 @@
 {
     "name": "express-upload-resizer",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Resizes files uploads and stores them in a given directory",
     "main": "index.js",
     "scripts": {
@@ -18,7 +18,7 @@
     "license": "BSD",
     "dependencies": {
         "mkdirp" : "0.3.x",
-        "gm" : "1.8.x"
+        "gm" : ">1.8.0 <2.0.0"
     },
     "devDependencies" : {
         "mocha" : "1.8.x",
