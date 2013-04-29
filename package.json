@@ -15,7 +15,7 @@
         "middleware"
     ],
     "author": "Thomas Peklak",
-    "license": "BSD",
+    "license": "MIT",
     "dependencies": {
         "mkdirp" : "0.3.x",
         "gm" : ">1.8.0 <2.0.0"
