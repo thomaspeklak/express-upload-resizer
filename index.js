@@ -52,6 +52,7 @@ var processFile = function (file, type, cb) {
 var done = function (files, options, next) {
     var processed = 0;
     var filesCount = getFilesCount(files, options);
+    if (filesCount == 0) return next;
     return function () {
         processed += 1;
 
