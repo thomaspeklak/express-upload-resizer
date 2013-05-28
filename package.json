@@ -21,7 +21,7 @@
         "gm" : ">1.8.0 <2.0.0"
     },
     "devDependencies" : {
-        "mocha" : "1.8.x",
+        "mocha" : "1.10.x",
         "should" : "1.2.x"
     }
 }
